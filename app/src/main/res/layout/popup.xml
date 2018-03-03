@@ -15,7 +15,7 @@
         android:textSize="45dp" />
 
     <TextView
-        android:id="@+id/popup"
+        android:id="@+id/display_winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Blytherinclaw! won with ### points!"

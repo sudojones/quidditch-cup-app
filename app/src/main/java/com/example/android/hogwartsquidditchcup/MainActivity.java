@@ -1,5 +1,7 @@
 package com.example.android.hogwartsquidditchcup;
 
+import android.content.Intent;
+import android.os.TestLooperManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -137,19 +139,32 @@ public class MainActivity extends AppCompatActivity {
         displayScoreHouseB(houseBScore);
     }
 
-    public void finalMatch() {
+    String winningHouse = "";
+    int winningScore;
+
+    public void displayWinner() {
+        TextView winner = (TextView) findViewById(R.id.display_winner);
+        winner.setText(String.valueOf(
+                winningHouse + "won with " + winningScore + " points!"));
+    }
+
+    public void calcWinner() {
         int g = gryfScoreTotal;
         int h = huffScoreTotal;
         int r = raveScoreTotal;
         int s = slyScoreTotal;
         if (g > h && g > r && g > s) {
-            //Gryffindor won
-        } else if (h>r && h>s) {
-            //Hufflepuff won
-        } else if (r>s) {
-            //Ravenclaw won
+            winningHouse = "Gryffindor";
+            winningScore = gryfScoreTotal;//Gryffindor won
+        } else if (h > r && h > s) {
+            winningHouse = "Hufflepuff";
+            winningScore = huffScoreTotal;//Hufflepuff won
+        } else if (r > s) {
+            winningHouse = "Ravenclaw";
+            winningScore = raveScoreTotal;//Ravenclaw won
         } else {
-            //Slytherin won
+            winningHouse = "Slythering";
+            winningScore = slyScoreTotal;//Slytherin won
         }
     }
 
@@ -178,8 +193,15 @@ public class MainActivity extends AppCompatActivity {
             case 6:
                 gryfScoreTotal = gryfScoreTotal + houseAScore;
                 raveScoreTotal = raveScoreTotal + houseBScore;
+                calcWinner();
+                displayWinner();
+                resetApp();
         }
         beginNextMatch();
+    }
+
+    public void resetApp() {
+        startActivity(new Intent(MainActivity.this, Pop.class));
     }
 
     /**
