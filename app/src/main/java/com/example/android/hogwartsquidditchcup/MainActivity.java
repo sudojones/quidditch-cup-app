@@ -1,7 +1,5 @@
 package com.example.android.hogwartsquidditchcup;
 
-import android.content.Intent;
-import android.os.TestLooperManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -126,6 +124,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Display Current Scores
+     */
+    public void displayCurrentScores() {
+        TextView gryfScore = (TextView) findViewById(R.id.gryf_score);
+        TextView raveScore = (TextView) findViewById(R.id.rave_score);
+        TextView huffScore = (TextView) findViewById(R.id.huff_score);
+        TextView slyScore = (TextView) findViewById(R.id.sly_score);
+        gryfScore.setText(String.valueOf(gryfScoreTotal));
+        raveScore.setText(String.valueOf(raveScoreTotal));
+        huffScore.setText(String.valueOf(huffScoreTotal));
+        slyScore.setText(String.valueOf(slyScoreTotal));
+    }
+
+    /**
      * Next Match Button
      */
     public void beginNextMatch() {
@@ -137,15 +149,15 @@ public class MainActivity extends AppCompatActivity {
         displayHouses();
         displayScoreHouseA(houseAScore);
         displayScoreHouseB(houseBScore);
+        displayCurrentScores();
     }
 
     String winningHouse = "";
-    int winningScore;
 
     public void displayWinner() {
         TextView winner = (TextView) findViewById(R.id.display_winner);
         winner.setText(String.valueOf(
-                winningHouse + "won with " + winningScore + " points!"));
+                "Wicked! " + winningHouse + " won the Quidditch Cup!"));
     }
 
     public void calcWinner() {
@@ -155,16 +167,12 @@ public class MainActivity extends AppCompatActivity {
         int s = slyScoreTotal;
         if (g > h && g > r && g > s) {
             winningHouse = "Gryffindor";
-            winningScore = gryfScoreTotal;//Gryffindor won
         } else if (h > r && h > s) {
             winningHouse = "Hufflepuff";
-            winningScore = huffScoreTotal;//Hufflepuff won
         } else if (r > s) {
             winningHouse = "Ravenclaw";
-            winningScore = raveScoreTotal;//Ravenclaw won
         } else {
             winningHouse = "Slythering";
-            winningScore = slyScoreTotal;//Slytherin won
         }
     }
 
@@ -195,23 +203,30 @@ public class MainActivity extends AppCompatActivity {
                 raveScoreTotal = raveScoreTotal + houseBScore;
                 calcWinner();
                 displayWinner();
-                resetApp();
+                currentMatch = 0;
+                gryfScoreTotal = 0;
+                raveScoreTotal = 0;
+                huffScoreTotal = 0;
+                slyScoreTotal = 0;
         }
         beginNextMatch();
     }
 
-    public void resetApp() {
-        startActivity(new Intent(MainActivity.this, Pop.class));
-    }
 
     /**
      * Reset Match Button
      */
+    public void resetText() {
+        TextView winner = (TextView) findViewById(R.id.display_winner);
+        winner.setText(String.valueOf(""));
+    }
+
     public void resetButton(View view) {
         houseAScore = 0;
         houseBScore = 0;
         displayScoreHouseA(houseAScore);
         displayScoreHouseB(houseBScore);
+        resetText();
     }
 
 }
