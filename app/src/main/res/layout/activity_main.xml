@@ -35,6 +35,7 @@
                 android:textAlignment="center" />
 
             <TextView
+                android:id="@+id/house_a_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -43,13 +44,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="goal"
+                android:onClick="goalA"
                 android:text="Goal!" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="snitch"
+                android:onClick="snitchA"
                 android:text="snitch" />
 
         </LinearLayout>
@@ -73,6 +74,7 @@
                 android:textAlignment="center" />
 
             <TextView
+                android:id="@+id/house_b_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
@@ -81,13 +83,13 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="goal"
+                android:onClick="goalB"
                 android:text="Goal!" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="snitch"
+                android:onClick="snitchB"
                 android:text="snitch" />
 
         </LinearLayout>
