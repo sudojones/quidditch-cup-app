@@ -137,6 +137,22 @@ public class MainActivity extends AppCompatActivity {
         displayScoreHouseB(houseBScore);
     }
 
+    public void finalMatch() {
+        int g = gryfScoreTotal;
+        int h = huffScoreTotal;
+        int r = raveScoreTotal;
+        int s = slyScoreTotal;
+        if (g > h && g > r && g > s) {
+            //Gryffindor won
+        } else if (h>r && h>s) {
+            //Hufflepuff won
+        } else if (r>s) {
+            //Ravenclaw won
+        } else {
+            //Slytherin won
+        }
+    }
+
     public void nextMatch(View view) {
         switch (currentMatch) {
             case 1:
