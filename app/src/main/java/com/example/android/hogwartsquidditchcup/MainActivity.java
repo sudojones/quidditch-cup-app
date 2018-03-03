@@ -11,6 +11,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        displayCurrentMatch(currentMatch);
+        setCurrentHouses(currentMatch);
+        displayHouses();
     }
 
     /**
@@ -21,10 +24,6 @@ public class MainActivity extends AppCompatActivity {
     /* Match Score */
     int houseAScore = 0;
     int houseBScore = 0;
-    int gryfScore = 0;
-    int huffScore = 0;
-    int raveScore = 0;
-    int slyScore = 0;
 
     /*Total Score*/
     int gryfScoreTotal = 0;
@@ -41,36 +40,43 @@ public class MainActivity extends AppCompatActivity {
      */
     public void displayCurrentMatch(int currentMatch) {
         TextView matchView = (TextView) findViewById(R.id.currentMatch);
-        matchView.setText(String.valueOf(currentMatch));
+        matchView.setText(String.valueOf("Match " + currentMatch + " of 6"));
     }
 
     public void setCurrentHouses(int currentMatch) {
         switch (currentMatch) {
             case 1:
-                houseA = "gryf";
-                houseB = "sly";
+                houseA = "Gryffindor";
+                houseB = "Slytherin";
                 break;
             case 2:
-                houseA = "huff";
-                houseB = "rave";
+                houseA = "Hufflepuff";
+                houseB = "Ravenclaw";
                 break;
             case 3:
-                houseA = "rave";
-                houseB = "sly";
+                houseA = "Ravenclaw";
+                houseB = "Slytherin";
                 break;
             case 4:
-                houseA = "gryf";
-                houseB = "huff";
+                houseA = "Gryffindor";
+                houseB = "Hufflepuff";
                 break;
             case 5:
-                houseA = "huff";
-                houseB = "sly";
+                houseA = "Hufflepuff";
+                houseB = "Slytherin";
                 break;
             case 6:
-                houseA = "gryf";
-                houseB = "rave";
+                houseA = "Gryffindor";
+                houseB = "Ravenclaw";
                 break;
         }
+    }
+
+    public void displayHouses() {
+        TextView currentHouseA = (TextView) findViewById(R.id.house_a);
+        TextView currentHouseB = (TextView) findViewById(R.id.house_b);
+        currentHouseA.setText(String.valueOf(houseA));
+        currentHouseB.setText(String.valueOf(houseB));
     }
 
 
@@ -78,13 +84,13 @@ public class MainActivity extends AppCompatActivity {
      * Displays House scores for current match
      */
     /*House A*/
-    public void displayForHouseA(int score) {
+    public void displayScoreHouseA(int score) {
         TextView scoreView = (TextView) findViewById(R.id.house_a_score);
         scoreView.setText(String.valueOf(score));
     }
 
     /*House B*/
-    public void displayForHouseB(int score) {
+    public void displayScoreHouseB(int score) {
         TextView scoreView = (TextView) findViewById(R.id.house_b_score);
         scoreView.setText(String.valueOf(score));
     }
@@ -95,12 +101,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void goalA(View view) {
         houseAScore = houseAScore + 10;
-        displayForHouseA(houseAScore);
+        displayScoreHouseA(houseAScore);
     }
 
     public void snitchA(View view) {
         houseAScore = houseAScore + 150;
-        displayForHouseA(houseAScore);
+        displayScoreHouseA(houseAScore);
     }
 
     /**
@@ -109,12 +115,65 @@ public class MainActivity extends AppCompatActivity {
 
     public void goalB(View view) {
         houseBScore = houseBScore + 10;
-        displayForHouseB(houseAScore);
+        displayScoreHouseB(houseBScore);
     }
 
     public void snitchB(View view) {
         houseBScore = houseBScore + 150;
-        displayForHouseB(houseBScore);
+        displayScoreHouseB(houseBScore);
+    }
+
+    /**
+     * Next Match Button
+     */
+    public void beginNextMatch() {
+        houseAScore = 0;
+        houseBScore = 0;
+        currentMatch = currentMatch + 1;
+        displayCurrentMatch(currentMatch);
+        setCurrentHouses(currentMatch);
+        displayHouses();
+        displayScoreHouseA(houseAScore);
+        displayScoreHouseB(houseBScore);
+    }
+
+    public void nextMatch(View view) {
+        switch (currentMatch) {
+            case 1:
+                gryfScoreTotal = houseAScore;
+                slyScoreTotal = houseBScore;
+                break;
+            case 2:
+                huffScoreTotal = houseAScore;
+                raveScoreTotal = houseBScore;
+                break;
+            case 3:
+                raveScoreTotal = raveScoreTotal + houseAScore;
+                slyScoreTotal = slyScoreTotal + houseBScore;
+                break;
+            case 4:
+                gryfScoreTotal = gryfScoreTotal + houseAScore;
+                huffScoreTotal = huffScoreTotal + houseBScore;
+                break;
+            case 5:
+                huffScoreTotal = huffScoreTotal + houseAScore;
+                slyScoreTotal = slyScoreTotal + houseBScore;
+                break;
+            case 6:
+                gryfScoreTotal = gryfScoreTotal + houseAScore;
+                raveScoreTotal = raveScoreTotal + houseBScore;
+        }
+        beginNextMatch();
+    }
+
+    /**
+     * Reset Match Button
+     */
+    public void resetButton(View view) {
+        houseAScore = 0;
+        houseBScore = 0;
+        displayScoreHouseA(houseAScore);
+        displayScoreHouseB(houseBScore);
     }
 
 }

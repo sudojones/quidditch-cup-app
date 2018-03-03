@@ -28,7 +28,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/HouseA"
+                android:id="@+id/house_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="HouseA"
@@ -39,7 +39,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="56dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -67,7 +69,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/HouseB"
+                android:id="@+id/house_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="HouseB"
@@ -78,7 +80,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textAlignment="center" />
+                android:textAlignment="center"
+                android:textColor="@android:color/black"
+                android:textSize="56dp" />
 
             <Button
                 android:layout_width="match_parent"
@@ -99,10 +103,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:text="Next Match"/>
+        android:onClick="nextMatch"
+        android:text="Next Match" />
 
     <Button
         android:layout_width="wrap_content"
@@ -110,6 +115,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="reset match"/>
+        android:onClick="resetButton"
+        android:text="reset match" />
 
 </RelativeLayout>
